@@ -6,5 +6,4 @@ function triggerMode(){
     const result3 = num1 * num2
     const result4 = num1 / num2
     document.getElementById('res').textContent = 'Sum: ' + result + ' - Minus: ' + result2 + ' - Multiply: ' + result3 + ' - Divide: ' + result4
-
 }
