@@ -23,7 +23,15 @@
         <ion-item>
             <ion-input 
             id="num1"
-            label="Enter Birth Year"
+            label="Enter Total Sales: "
+            label-placement="floating"  
+            type="number"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-input 
+            id="num2"
+            label="Tax Percentage: "
             label-placement="floating"  
             type="number"></ion-input>
         </ion-item>
@@ -32,13 +40,27 @@
         <ion-button expand="block" onclick="triggerMode()" color="dark">PROCESS OPERATION</ion-button>
         <!-- Result -->
         <ion-item>
-            <ion-label>Result:</ion-label>
-            <ion-text id="res"></ion-text>
+            <ion-label>SubTotal:</ion-label>
+            <ion-text id="res1"></ion-text>
+        </ion-item>
+        <ion-item>
+            <ion-label>Sales Tax:</ion-label>
+            <ion-text id="res2"></ion-text>
         </ion-item>
     </ion-content>
 </ion-app>
 
     <script>
+        function triggerMode(){
+            const num1 = parseFloat(document.getElementById('num1').value)
+            const num2 = parseFloat(document.getElementById('num2').value)
+
+            const tax = num1 * (num2/100)
+            const sub = num1 - tax
+
+            document.getElementById('res1').textContent = sub
+            document.getElementById('res2').textContent = tax + '%'
+        }
     </script>
 </body>
 </html>
