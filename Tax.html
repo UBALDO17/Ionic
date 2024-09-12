@@ -10,45 +10,45 @@
 </head>
 <body>
 
-<ion-app>
-    <!-- Header -->
-    <ion-header>
-        <ion-toolbar color="tertiary">
-            <ion-title>Tax App</ion-title>
-        </ion-toolbar>
-    </ion-header>
-    <!-- Content -->
-    <ion-content>
-        <!-- Number 1 -->
-        <ion-item>
-            <ion-input 
-            id="num1"
-            label="Enter Total Sales: "
-            label-placement="floating"  
-            type="number"></ion-input>
-        </ion-item>
+    <ion-app>
+        <!-- Header -->
+        <ion-header>
+            <ion-toolbar color="tertiary">
+                <ion-title>Tax App</ion-title>
+            </ion-toolbar>
+        </ion-header>
+        <!-- Content -->
+        <ion-content>
+            <!-- Number 1 -->
+            <ion-item>
+                <ion-input 
+                id="num1"
+                label="Enter Total Sales: "
+                label-placement="floating"  
+                type="number"></ion-input>
+            </ion-item>
 
-        <ion-item>
-            <ion-input 
-            id="num2"
-            label="Tax Percentage: "
-            label-placement="floating"  
-            type="number"></ion-input>
-        </ion-item>
+            <ion-item>
+                <ion-input 
+                id="num2"
+                label="Tax Percentage: "
+                label-placement="floating"  
+                type="number"></ion-input>
+            </ion-item>
 
-        <!-- Button -->
-        <ion-button expand="block" onclick="triggerMode()" color="dark">PROCESS OPERATION</ion-button>
-        <!-- Result -->
-        <ion-item>
-            <ion-label>SubTotal:</ion-label>
-            <ion-text id="res1"></ion-text>
-        </ion-item>
-        <ion-item>
-            <ion-label>Sales Tax:</ion-label>
-            <ion-text id="res2"></ion-text>
-        </ion-item>
-    </ion-content>
-</ion-app>
+            <!-- Button -->
+            <ion-button expand="block" onclick="triggerMode()" color="dark">PROCESS OPERATION</ion-button>
+            <!-- Result -->
+            <ion-item>
+                <ion-label>SubTotal:</ion-label>
+                <ion-text id="res1"></ion-text>
+            </ion-item>
+            <ion-item>
+                <ion-label>Sales Tax:</ion-label>
+                <ion-text id="res2"></ion-text>
+            </ion-item>
+        </ion-content>
+    </ion-app>
 
     <script>
         function triggerMode(){
