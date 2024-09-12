@@ -14,14 +14,13 @@
     <!-- Header -->
     <ion-header>
         <ion-toolbar color="tertiary">
-            <ion-title>Birth Year App </ion-title>
+            <ion-title>Birth Year App</ion-title>
         </ion-toolbar>
     </ion-header>
     <!-- Content -->
     <ion-content>
         <!-- Number 1 -->
         <ion-item>
-            <!-- <ion-label position="floating"><ion-icon name="add-outline"></ion-icon> Enter Number 1:</ion-label><br> -->
             <ion-input 
             id="num1"
             label="Enter Birth Year"
@@ -30,7 +29,7 @@
         </ion-item>
 
         <!-- Button -->
-        <ion-button expand="block" onclick="triggerMode()" color="dark">PROCESS OPERATION <ion-icon name="checkmark-circle-outline"></ion-icon></ion-button>
+        <ion-button expand="block" onclick="triggerMode()" color="dark">PROCESS OPERATION</ion-button>
         <!-- Result -->
         <ion-item>
             <ion-label>Result:</ion-label>
@@ -43,7 +42,7 @@
         function triggerMode(){
         const num1 = parseFloat(document.getElementById('num1').value)
         const result = 2024 - num1 
-        document.getElementById('res').textContent = 'You are: ' + result + ' years old'
+        document.getElementById('res').textContent = 'You are: ' + result + ' years old.'
         }
     </script>
 </body>
