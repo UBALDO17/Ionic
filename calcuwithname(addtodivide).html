@@ -55,12 +55,25 @@
 
         <!-- Result -->
         <ion-item>
-            <ion-label>Result: </ion-label>
-            <ion-text id="res"></ion-text>
-        </ion-item>
-        <ion-item>
             <ion-label>Name: </ion-label>
             <ion-text id="name"></ion-text>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Result Sum: </ion-label>
+            <ion-text id="res1"></ion-text>
+        </ion-item>
+        <ion-item>
+            <ion-label>Result Difference: </ion-label>
+            <ion-text id="res2"></ion-text>
+        </ion-item>
+        <ion-item>
+            <ion-label>Result Product: </ion-label>
+            <ion-text id="res3"></ion-text>
+        </ion-item>
+        <ion-item>
+            <ion-label>Result Quotient: </ion-label>
+            <ion-text id="res4"></ion-text>
         </ion-item>
 
     </ion-content>
@@ -72,13 +85,17 @@
             const num2 = parseFloat(document.getElementById('num2').value)
             const nm = document.getElementById('names').value
 
-            const result = num1 + num2
+            const result1 = num1 + num2
             const result2 = num1 - num2
             const result3 = num1 * num2
             const result4 = num1 / num2
 
-            document.getElementById('res').textContent = 'Sum: ' + result + ' - Minus: ' + result2 + ' - Multiply: ' + result3 + ' - Divide: ' + result4
             document.getElementById('name').textContent = nm
+            
+            document.getElementById('res1').innerHTML = '<b>Sum: </b>' + result1
+            document.getElementById('res2').innerHTML = '<b>Difference: </b>' + result2
+            document.getElementById('res3').innerHTML = '<b>Product: </b>' + result3
+            document.getElementById('res4').innerHTML = '<b>Quotient: </b>' + result4
         }
     </script>
 </body>
