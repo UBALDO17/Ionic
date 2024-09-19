@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+</head>
+<body>
+
+<ion-app>
+    <!-- Header -->
+    <ion-header>
+        <ion-toolbar color="tertiary">
+            <ion-title>Number Operation App</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <!-- Content -->
+    <ion-content>
+
+        <!-- Name -->
+        <ion-item>
+            <!-- <ion-label position="floating"><ion-icon name="add-outline"></ion-icon> Enter Number 1:</ion-label><br> -->
+            <ion-input 
+            id="name"
+            label="Enter Name"
+            label-placement="floating"  
+            type="text"></ion-input>
+        </ion-item>
+
+        <!-- Number 1 -->
+        <ion-item>
+            <!-- <ion-label position="floating"><ion-icon name="add-outline"></ion-icon> Enter Number 1:</ion-label><br> -->
+            <ion-input 
+            id="num1"
+            label="Enter Number 1"
+            label-placement="floating"  
+            type="number"></ion-input>
+        </ion-item>
+
+        <!-- Number 2 -->
+        <ion-item>
+            <!-- <ion-label position="floating"><ion-icon name="add-outline"></ion-icon> Enter Number 1:</ion-label><br> -->
+            <ion-input
+            id="num2" 
+            label="Enter Number 2"
+            label-placement="floating"  
+            type="number"></ion-input>
+        </ion-item>
+
+        <!-- Choose Operation -->
+        <ion-item>
+            <!-- <ion-label position="floating"><ion-icon name="add-outline"></ion-icon> Enter Number 1:</ion-label><br> -->
+            <ion-input
+            id="op" 
+            label="Enter Operation (1, 2, 3, 4)"
+            label-placement="floating"  
+            type="number"></ion-input>
+        </ion-item>
+        <br> 
+        <!-- Button -->
+        <ion-button expand="block" onclick="triggerMode()" color="dark">PROCESS OPERATION <ion-icon name="checkmark-circle-outline"></ion-icon></ion-button>
+        <!-- Result -->
+        <ion-item>
+            <ion-label>Result:</ion-label>
+            <ion-text id="res"></ion-text>
+        </ion-item>
+        <ion-item>
+            <ion-label>Name:</ion-label>
+            <ion-text id="nm"></ion-text>
+        </ion-item>
+    </ion-content>
+</ion-app>
+
+<script>
+    function triggerMode(){
+        const name = document.getElementById('name').value
+        const num1 = parseFloat(document.getElementById('num1').value)
+        const num2 = parseFloat(document.getElementById('num2').value)
+        const op = parseFloat(document.getElementById('op').value)
+
+        document.getElementById('nm').textContent = name
+
+        if (op == 1){
+            const result = num1 + num2
+            document.getElementById('res').innerHTML = '<b>Sum: </b>' + result
+        } else if (op == 2){
+            const result = num1 - num2
+            document.getElementById('res').innerHTML = '<b>Difference: </b>' + result
+        } else if (op == 3){
+            const result = num1 * num2
+            document.getElementById('res').innerHTML = '<b>Product: </b>' + result
+        } else if (op == 4){
+            const result = num1 / num2
+            document.getElementById('res').innerHTML = '<b>Quotient: </b>' + result
+        } else {
+            document.getElementById('res').textContent = "Invalid Operation"
+        }
+
+    }
+</script>
+
+</body>
+</html>
