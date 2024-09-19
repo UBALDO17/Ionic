@@ -18,7 +18,7 @@
         </ion-toolbar>
     </ion-header>
     <!-- Content -->
-    <ion-content>
+    <ion-content class="ion-padding">
 
         <!-- Name -->
         <ion-item>
@@ -96,7 +96,7 @@
             const result = num1 / num2
             document.getElementById('res').innerHTML = '<b>Quotient: </b>' + result
         } else {
-            document.getElementById('res').textContent = "Invalid Operation"
+            document.getElementById('res').innerHTML = "<b>Invalid Operation</b>"
         }
 
     }
