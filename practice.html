@@ -52,10 +52,11 @@
 
         <ion-item>
             <div>
-                <p>Type 1 for Addition</p>
-                <p>Type 2 for Subtraction</p>
-                <p>Type 3 for Multiplication</p>
-                <p>Type 4 for Division</p>
+                <h6>Type 1 for Addition</h6>
+                <h6>Type 2 for Subtraction</h6>
+                <h6>Type 3 for Multiplication</h6>
+                <h6>Type 4 for Division</h6>
+                <h6>Type 5 if all OPERATOR</h6>
             </div>
         </ion-item>
 
@@ -104,6 +105,14 @@
         } else if (op == 4){
             const result = num1 / num2
             document.getElementById('res').innerHTML = '<b>Quotient: </b>' + result
+        } else if (op == 5){
+            const result1 = num1 + num2
+            const result2 = num1 - num2
+            const result3 = num1 * num2
+            const result4 = num1 / num2
+
+            document.getElementById('res').innerHTML = '<b>Sum: </b>' + result1 + '<br>' + '<b>Difference: </b>' + result2 + '<br>' + '<b>Product: </b>' + result3 + '<br>' + '<b>Quotient: </b>' + result4
+            
         } else {
             document.getElementById('res').innerHTML = "<b>Invalid Operator</b>"
         }
