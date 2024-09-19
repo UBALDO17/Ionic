@@ -50,12 +50,21 @@
             type="number"></ion-input>
         </ion-item>
 
+        <ion-item>
+            <div>
+                <p>Type 1 for Addition</p>
+                <p>Type 2 for Subtraction</p>
+                <p>Type 3 for Multiplication</p>
+                <p>Type 4 for Division</p>
+            </div>
+        </ion-item>
+
         <!-- Choose Operation -->
         <ion-item>
             <!-- <ion-label position="floating"><ion-icon name="add-outline"></ion-icon> Enter Number 1:</ion-label><br> -->
             <ion-input
             id="op" 
-            label="Enter Operation (1, 2, 3, 4)"
+            label="Enter Operation"
             label-placement="floating"  
             type="number"></ion-input>
         </ion-item>
@@ -96,7 +105,7 @@
             const result = num1 / num2
             document.getElementById('res').innerHTML = '<b>Quotient: </b>' + result
         } else {
-            document.getElementById('res').innerHTML = "<b>Invalid Operation</b>"
+            document.getElementById('res').innerHTML = "<b>Invalid Operator</b>"
         }
 
     }
