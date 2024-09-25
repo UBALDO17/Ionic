@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Delivery Form</title>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+</head>
+<body>
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Food Delivery Form</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+
+
+    <ion-item>
+      <ion-label position="floating">Delivery Address</ion-label>
+      <ion-input id="address" placeholder="Enter your Address"></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Payment method</ion-label>
+      <ion-select id="payment" type="checked">
+        <ion-select-option value="Gcash">Gcash</ion-select-option>
+        <ion-select-option value="Cod">Cash on Delivery</ion-select-option>
+        <ion-select-option value="Credit Card">Credit Card</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Save Payment method</ion-label>
+      <ion-checkbox id="savepayment"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Food Price</ion-label>
+      <ion-input id="price" type="number"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" onclick="triggerOrder()">SUBMIT ORDER</ion-button>
+
+
+    <div>
+      <ion-card>
+        <ion-card-content id="result"></ion-card-content>
+      </ion-card>
+    </div>
+
+  </ion-content>
+
+  <script>
+    function triggerOrder() {
+      const address = document.getElementById('address').value;
+      const paymentMethod = document.getElementById('payment').value;
+      const savepayment = document.getElementById('savepayment').checked ? 'Payment Method will be saved.' : 'Payment Method will not be saved.';
+      const price = document.getElementById('price').value;
+
+      
+      document.getElementById('result').innerHTML = `Address: ${address} <br> Payment Method: ${paymentMethod} <br> ${savepayment} <br> Price: ${price}`;
+    }
+  </script>
+
+</body>
+</html>
