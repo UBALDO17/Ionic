@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select App</title>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+</head>
+<body>
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Select App</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+     
+    <ion-list>
+        <ion-item>
+            <ion-checkbox id="cb1" value="1"></ion-checkbox>
+            <ion-label>Value 1</ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-checkbox id="cb2" value="2"></ion-checkbox>
+            <ion-label>Value 2</ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-checkbox id="cb3" value="3"></ion-checkbox>
+            <ion-label>Value 3</ion-label>
+        </ion-item>
+
+
+    </ion-list>
+
+    <ion-button expand="block" onclick="trig()">Process Operation</ion-button>
+
+    <div>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Display Result</ion-card-title>
+        </ion-card-header>
+        <ion-card-content id="res"></ion-card-content>
+      </ion-card>
+    </div>
+
+  </ion-content>
+
+
+  <script>
+    function trig(){
+        let result = 0
+
+        const cb1 = document.getElementById('cb1')
+        const cb2 = document.getElementById('cb2')
+        const cb3 = document.getElementById('cb3')
+
+        if(cb1.checked){
+            result += parseInt(cb1.value)
+        }
+        
+        if (cb2.checked){
+            result += parseInt(cb2.value)
+        }
+        
+        if (cb3.checked){
+            result += parseInt(cb3.value)
+        }
+        
+        document.getElementById('res').innerHTML = result
+    }
+  
+  </script>
+
+
+</body>
+</html>
