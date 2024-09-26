@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents</title>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+</head>
+<body>
+
+<ion-app>
+    <!-- Header -->
+    <ion-header>
+        <ion-toolbar color="tertiary">
+            <ion-title>Food Delivery Form</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <!-- Content -->
+    <ion-content class="ion-padding">
+
+        <!-- Delivery Address -->
+        <ion-item>
+            <ion-input 
+            id="add"
+            label="Delivery Address"
+            label-placement="floating"  
+            type="text"></ion-input>
+        </ion-item>
+
+        <!-- Payment Method -->
+        <ion-list>
+            <ion-item>
+                <ion-select label="Payment Method" id="payment" placeholder="Choose your Payment">
+                    <ion-select-option value="Credit Card">Credit Card</ion-select-option>
+                    <ion-select-option value="Paypal">Paypal</ion-select-option>
+                    <ion-select-option value="Cash">Cash on Hand</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+
+        <!-- Save Payment Method -->
+        <ion-list>
+            <ion-item>
+                <ion-checkbox id="save">Save Payment Method</ion-checkbox>
+                <ion-label></ion-label>
+            </ion-item>
+        </ion-list>
+        <br>
+
+        <!-- Button -->
+        <ion-button expand="full" onclick="triggerMode()" color="primary">SUBMIT ORDER</ion-button>
+        
+        <!-- Result -->
+        <div>
+            <ion-item>
+                <ion-text id="res"></ion-text>
+            </ion-item>
+        </div>
+
+    </ion-content>
+</ion-app>
+
+<script>
+    function triggerMode(){
+        const add = document.getElementById('add').value
+        const payment = document.getElementById('payment').value
+        const save = document.getElementById('save')
+
+        let saved = "";
+
+        if (save.checked){
+            saved = "Payment Method will be saved."
+        } else {
+            saved = "Payment Method will not be saved."
+        }
+
+        document.getElementById('res').innerHTML = "Address: " + add + "<br>" + "Payment Method: " + payment + "<br>" + saved + "<br>"; 
+    }
+</script>
+
+</body>
+</html>
