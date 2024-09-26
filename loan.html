@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Delivery Form</title>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+</head>
+<body>
+
+<ion-app>
+
+    <!-- Header -->
+    <ion-header>
+        <ion-toolbar color="tertiary">
+            <ion-title>Loan Eligibility</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    
+    <!-- Content -->
+    <ion-content class="ion-padding">
+
+        <!-- Monthly Income -->
+        <ion-item>
+            <ion-input 
+            id="income"
+            label="Monthly Income"
+            label-placement="floating"  
+            type="number"></ion-input>
+        </ion-item>
+
+        <!-- Loan Type -->
+        <ion-list>
+            <ion-item>
+                <ion-select label="Loan Type" id="loan_type" placeholder="Select Loan Type">
+                    <ion-select-option value="Personal">Personal</ion-select-option>
+                    <ion-select-option value="Home">Home</ion-select-option>
+                    <ion-select-option value="Auto">Auto</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+
+        <!-- Existing Debts -->
+        <ion-list>
+            <ion-item>
+                <ion-checkbox id="debt">Existing Debts</ion-checkbox>
+                <ion-label></ion-label>
+            </ion-item>
+        </ion-list>
+
+        <br>
+
+        <!-- Button -->
+        <ion-button expand="full" onclick="triggerMode()" color="primary">CHECK ELIGIBILITY</ion-button>
+        <br>
+        
+        <!-- Result -->
+        <div>
+            <ion-card>
+                <ion-card-header>
+                    <ion-card-title ion-card-title>Eligibility Result</ion-card-title>
+                </ion-card-header>
+                <ion-card-content id="res">The result will appear here...</ion-card-content>
+            </ion-card>
+        </div>
+
+    </ion-content>
+</ion-app>
+
+<script>
+    function triggerMode(){
+        const income = parseInt(document.getElementById('income').value)
+        const loan_type = document.getElementById('loan_type').value
+
+        if (loan_type == "Personal"){
+            //      Get 70% income + income
+            loan = (income * 0.70) + income
+        } else if (loan_type == "Home"){
+            //      Get 80% income + income
+            loan = (income * 0.80) + income
+        } else {
+            //      Get 60% income + income
+            loan = (income * 0.60) + income
+        }
+
+        const debt = document.getElementById('debt')
+        if (debt.checked){
+            // Deduct loan from 30% of income 
+            loan = loan - (income * 0.30)
+        }
+
+        document.getElementById('res').innerHTML = `Congatulations, you can loan <b>${loan}</b>.`
+    }
+</script>
+
+</body>
+</html>
