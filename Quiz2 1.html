@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+</head>
+<body>
+    <!-- HEADER -->
+    <ion-header>
+        <ion-toolbar>
+          <ion-title>Select App</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <!-- ION INPUT -->
+      <ion-content class="ion-padding">
+      <ion-item>
+        <ion-input id="salary" placeholder="Enter your salary">Enter your salary</ion-input>
+      </ion-item>
+
+      <!-- ION SELECT -->
+        <ion-item>
+            <ion-select label="Select Loan" id="loan" placeholder="Laons">
+                <ion-select-option value="pLoan">Personal Loan</ion-select-option>
+                <ion-select-option value="hLoan">Home Loan</ion-select-option>
+                <ion-select-option value="aLoan">Auto Loan</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <!-- ION CHECKBOX -->
+        <ion-item>
+            <ion-label>In Debt</ion-label>
+            <ion-checkbox id="debt"></ion-checkbox>     
+        </ion-item>
+    </ion-list>
+    
+    <!-- BUTTON -->
+    <ion-button expand="block" onclick="trig()">Process Operation</ion-button>
+
+    <div>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Display Result</ion-card-title>
+          </ion-card-header>
+          <ion-card-content id="res"></ion-card-content>
+        </ion-card>
+      </div>
+    </ion-content>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        function trig(){
+        const salary = parseInt(document.getElementById('salary').value)
+        const loan = document.getElementById('loan').value
+        let result
+        
+        // PERSONAL LOAN
+        if(loan == "pLoan"){
+            result = salary * 10
+            document.getElementById('res').innerHTML = result
+            if(debt.checked){
+                result = (salary * 10) * 0.7
+                document.getElementById('res').innerHTML = result
+            }
+        }
+
+        // HOME LOAN
+        if(loan == "hLoan"){
+            result = salary * 20
+            document.getElementById('res').innerHTML = result
+            if(debt.checked){
+                result = (salary * 20) * 0.7
+                document.getElementById('res').innerHTML = result
+            }
+        }
+
+        // AUTO LOAN
+        if(loan == "aLoan"){
+            result = salary * 15
+            document.getElementById('res').innerHTML = result
+            if(debt.checked){
+                result = (salary * 15) * 0.7
+                document.getElementById('res').innerHTML = result
+            }
+        }
+    }
+    </script>
+</body>
+</html>
