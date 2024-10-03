@@ -93,6 +93,8 @@
 
         if (discount == "yes"){
             notDisplay.style.display = "block"
+        } else {
+            notDisplay.style.display = "none"
         }
     }
 
@@ -106,7 +108,7 @@
         let total = product_price;
         let vouch_text = "";
         let output = "";
-        
+
         if (discount == "yes"){
             if (voucher == "christian"){
                 total = product_price - (product_price * 0.1)
