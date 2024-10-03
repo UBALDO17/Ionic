@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+    <title>Product Discount</title>
+</head>
+<body>
+
+    <ion-app>
+        <!-- ION-HEADER -->
+        <ion-header>
+            <ion-toolbar color="tertiary">
+                <ion-title>Product Price</ion-title>
+            </ion-toolbar>
+        </ion-header>
+
+        <!-- ION-CONTENT -->
+         <ion-content>
+
+            <!-- Name Input -->
+            
+            <ion-item>
+                <ion-input id="name_id" label="Enter Your Name" label-placement="floating"></ion-input>
+            </ion-item>
+            
+
+            <!-- Product Input -->
+             <ion-item>
+                <ion-input id="product_id" label="Enter Your Product" label-placement="floating"></ion-input>
+             </ion-item>
+
+             <!-- Product Price -->
+             <ion-item>
+                <ion-input id="price_id" label="Enter Your Price" label-placement="floating" type="number"></ion-input>
+             </ion-item>
+
+
+             <!-- Discount Confirmation -->
+             <ion-list>
+                <ion-item id="discount_confirm_content">
+                    <ion-select label="Discount?" id="discount_confirm" placeholder="Yes" (ionChange)="selectFunction()">
+                        <ion-select-option value="Yes">Yes</ion-select-option>
+                        <ion-select-option value="No">No</ion-select-option>
+                    </ion-select>
+                </ion-item>
+             </ion-list>
+
+
+             <!-- Discount Input -->
+             <ion-item id="discount_content" style="display: none;">
+                 <ion-input id="discount_code" label="Enter Discount Code" label-placement="floating"></ion-input> 
+             </ion-item>
+
+             <ion-button expand="block" onclick="niggerMode()">Process Order</ion-button>
+
+             <div id="disContent" style="display: none;">
+                <ion-card>
+                  <ion-card-header>
+                    <ion-card-title>ORDER SUMMARY: </ion-card-title>
+                  </ion-card-header>
+
+                  <p>&nbsp;Customer: <span id="res_name"></span></p>
+                  <p>&nbsp;Product: <span id="res_product"></span></p>
+                  <p>&nbsp;Price: <span id="res_price"></span></p>
+                  <p id="discount_alert" style="display: none;">&nbsp;Discount Code: <span id="res_code"></span></p>
+                  <p>&nbsp;Total Amount: <span id="res_total_amount"></span></p>
+
+                </ion-card>
+              </div>
+
+         </ion-content>
+
+
+
+    </ion-app>
+   
+    <script>
+        document.getElementById('discount_confirm').addEventListener("ionChange", selectFunction)
+
+function selectFunction(){
+    const discount_confirm = document.getElementById('discount_confirm').value
+
+    if(discount_confirm == "Yes"){
+        document.getElementById('discount_content').style.display = "block"
+    }
+    else{
+         document.getElementById('discount_content').style.display = "none"
+    }
+}
+
+
+function niggerMode(){
+    const name_id = document.getElementById('name_id').value
+    const product_id = document.getElementById('product_id').value
+    const price_id = parseFloat(document.getElementById('price_id').value)
+    const discount_code = document.getElementById('discount_code').value
+    const discount_confirm = document.getElementById('discount_confirm').value
+
+    document.getElementById('res_name').textContent = name_id
+    document.getElementById('res_product').textContent = product_id
+    document.getElementById('res_price').textContent = price_id
+    
+    document.getElementById('disContent').style.display = "block"
+    let discounted_price = price_id * .10
+
+    
+   if(discount_confirm == "Yes"){
+    document.getElementById('discount_alert').style.display = "block"
+   }
+   else{
+    document.getElementById('discount_alert').style.display = "none"
+   }
+
+    if(discount_code.trim() != "" && discount_code == "DISCOUNT10"){
+        
+        document.getElementById("res_code").textContent = discount_code
+        document.getElementById('res_total_amount').textContent = (price_id - discounted_price).toFixed(2)
+    }
+    else if(discount_code != "DISCOUNT10"){
+        document.getElementById("res_code").textContent = "Invalid Discount Code"
+        document.getElementById('res_total_amount').textContent = price_id.toFixed(2)
+    }
+
+}
+    </script>
+
+
+</body>
+</html>
