@@ -7,8 +7,6 @@
   <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
   <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
-
-  <title>EXAM WEEK</title>
 </head>
 <body>
   <ion-header>
@@ -18,118 +16,61 @@
   </ion-header>
 
   <ion-content class="ion-padding">
-    <form id="discountForm">
-      <ion-item>
-        <ion-label position="stacked">Name</ion-label>
-        <ion-input id="name" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="stacked">Product Name</ion-label>
-        <ion-input id="productName" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="stacked">Product Price</ion-label>
-        <ion-input type="number" id="productPrice" required></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Discounted?</ion-label>
-        <ion-select id="isDiscounted">
-          <ion-select-option value="y">Yes</ion-select-option>
-          <ion-select-option value="n">No</ion-select-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item id="discountCodeItem" style="display: none;">
-        <ion-label position="stacked">Enter Discount Code</ion-label>
-        <ion-input id="discountCode"></ion-input>
-      </ion-item>
-
+    <form id="form">
+      <ion-item><ion-label position="stacked">Name:</ion-label><ion-input id="name" required></ion-input></ion-item>
+      <ion-item><ion-label position="stacked">Product Name:</ion-label><ion-input id="pName" required></ion-input></ion-item>
+      <ion-item><ion-label position="stacked">Product Price:</ion-label><ion-input type="number" id="pPrice" required></ion-input></ion-item>
+      <ion-item><ion-label>Apply Discount:</ion-label><ion-select id="isDisc">
+        <ion-select-option value="y">Yes</ion-select-option>
+        <ion-select-option value="n">No</ion-select-option>
+      </ion-select></ion-item>
+      <ion-item id="discCodeItem" hidden><ion-label position="stacked">Enter Discount Code:</ion-label><ion-input id="discCode"></ion-input></ion-item>
       <ion-button expand="block" type="submit">Apply Discount</ion-button>
     </form>
 
-    <ion-card id="summaryCard" style="display: none;">
-      <ion-card-header>
-        <ion-card-title>Order Summary</ion-card-title>
-      </ion-card-header>
+    <ion-card id="sumCard" hidden>
+      <ion-card-header><ion-card-title>Order Summary</ion-card-title></ion-card-header>
       <ion-card-content>
-        <p><strong>Name:</strong> <span id="summaryName"></span></p>
-        <p><strong>Product Name:</strong> <span id="summaryProductName"></span></p>
-        <p><strong>Price:</strong> $<span id="summaryProductPrice"></span></p>
-        <p id="summaryDiscount" style="display: none;"><strong>Discount Code:</strong> <span id="summaryDiscountCode"></span></p>
-        <p id="summaryInvalidCode" ><strong>Invalid Code:</strong> No Discount Added.</p>
-        <p><strong>Total Price:</strong> $<span id="summaryTotalPrice"></span></p>
+        <p><strong>Name:</strong> <span id="sumName"></span></p>
+        <p><strong>Product Name:</strong> <span id="sumPName"></span></p>
+        <p><strong>Price:</strong> $<span id="sumPPrice"></span></p>
+        <p id="sumDisc" hidden><strong>Discount Code:</strong> <span id="sumDiscCode"></span></p>
+        <p id="sumInvalid" hidden><strong>Invalid Code:</strong> No Discount Added.</p>
+        <p><strong>Total Price:</strong> $<span id="sumTotal"></span></p>
       </ion-card-content>
     </ion-card>
   </ion-content>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const form = document.getElementById('discountForm');
-      const isDiscountedSelect = document.getElementById('isDiscounted');
-      const discountCodeItem = document.getElementById('discountCodeItem');
-      const validDiscountCode = 'DISCOUNT123';
-      const discountAmount = 10; 
+      const form = document.getElementById('form');
+      const discCodeItem = document.getElementById('discCodeItem');
+      const sumCard = document.getElementById('sumCard');
+      const validCode = 'DISCOUNT123';
+      const discAmt = 10;
 
-      
-      isDiscountedSelect.addEventListener('ionChange', () => {
-        if (isDiscountedSelect.value === 'y') {
-          discountCodeItem.style.display = 'block';
-        } else {
-          discountCodeItem.style.display = 'none';
-        }
+      document.getElementById('isDisc').addEventListener('ionChange', (e) => {
+        discCodeItem.hidden = e.detail.value !== 'y';
       });
 
-     
-      form.addEventListener('submit', (event) => {
-        event.preventDefault();
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const pPrice = parseFloat(document.getElementById('pPrice').value);
+        const discCode = document.getElementById('discCode').value;
+        const discApplied = document.getElementById('isDisc').value === 'y' && discCode === validCode;
+        const total = discApplied ? pPrice - discAmt : pPrice;
 
-        const name = document.getElementById('name').value;
-        const productName = document.getElementById('productName').value;
-        const productPrice = parseFloat(document.getElementById('productPrice').value);
-        const isDiscounted = isDiscountedSelect.value;
-        const discountCode = document.getElementById('discountCode').value;
+        document.getElementById('sumName').innerText = document.getElementById('name').value;
+        document.getElementById('sumPName').innerText = document.getElementById('pName').value;
+        document.getElementById('sumPPrice').innerText = pPrice.toFixed(2);
+        document.getElementById('sumTotal').innerText = total.toFixed(2);
+        document.getElementById('sumDisc').hidden = !discApplied;
+        document.getElementById('sumDiscCode').innerText = discCode;
+        document.getElementById('sumInvalid').hidden = discApplied || document.getElementById('isDisc').value !== 'y';
 
-        let totalPrice = productPrice;
-        let appliedDiscount = false;
-        let invalidCode = false;
-
-        if (isDiscounted === 'y') {
-          if (discountCode === validDiscountCode) {
-            totalPrice -= discountAmount;
-            appliedDiscount = true;
-          } else {
-            invalidCode = true;
-          }
-        }
-
-        
-        document.getElementById('summaryName').innerText = name;
-        document.getElementById('summaryProductName').innerText = productName;
-        document.getElementById('summaryProductPrice').innerText = productPrice.toFixed(2);
-        document.getElementById('summaryTotalPrice').innerText = totalPrice.toFixed(2);
-
-        if (appliedDiscount) {
-          document.getElementById('summaryDiscount').style.display = 'block';
-          document.getElementById('summaryDiscountCode').innerText = discountCode;
-          document.getElementById('summaryInvalidCode').style.display = 'none';
-        } else {
-          document.getElementById('summaryDiscount').style.display = 'none';
-        }
-
-        if (invalidCode) {
-          document.getElementById('summaryInvalidCode').style.display = 'block';
-        } else {
-          document.getElementById('summaryInvalidCode').style.display = 'none';
-        }
-
-        
-        document.getElementById('summaryCard').style.display = 'block';
+        sumCard.hidden = false;
       });
     });
   </script>
-
 </body>
 </html>
