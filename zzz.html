@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+</head>
+<body>
+   <ion-header>
+        <ion-toolbar>
+            <ion-title>Food ORDER</ion-title>
+        </ion-toolbar>
+   </ion-header>
+   <ion-content>
+        <ion-item >
+            <ion-input label="Enter name" label-placement="floating" id="name"></ion-input>
+        </ion-item>
+        <ion-item >
+            <ion-input label="Enter Product name" label-placement="floating" id="product"></ion-input>
+        </ion-item>
+        <ion-item >
+            <ion-input label="Enter Product Price" label-placement="floating" id="price"></ion-input>
+        </ion-item>
+        <ion-item>
+        <ion-select id="discount" label="Have Discount?">
+            <ion-select-option value="yes">Yes</ion-select-option>
+            <ion-select-option value="no">No</ion-select-option>
+        </ion-select>
+    </ion-item>
+        <ion-item style="display: none;" id="vouch">
+            <ion-input label="Input Discount Code" label-placement="floating" id="voucher"></ion-input>
+        </ion-item>
+        <ion-button expand="block" onclick="trigger()">Submit</ion-button>
+
+        <ion-card>
+            <ion-item>
+                <ion-label>RESULT</ion-label>
+            </ion-item>
+        </ion-card>
+        <ion-card></ion-card>
+            <ion-item>
+                <ion-text id="res"></ion-text>
+            </ion-item>
+        </ion-card>
+   </ion-content>
+
+   <script>
+    document.getElementById('discount').addEventListener("ionChange",discounts)
+    function discounts(){
+        discount = document.getElementById('discount').value
+        discounted = document.getElementById('vouch')
+
+        if(discount=="yes"){
+            discounted.style.display="block"
+        }else{
+            discounted.style.display="none"
+        }
+    }
+
+    function trigger(){
+        const name = document.getElementById('name').value
+        const product = document.getElementById('product').value
+        const price = parseFloat(document.getElementById('price').value)
+        const discount = document.getElementById('discount').value
+        const code = "dave"
+        const vouch = document.getElementById('voucher').value.toLowerCase()
+        let total;
+
+        if(discount=="yes"){
+        if(vouch==code){
+            total = price -(price * 0.1)
+                    document.getElementById('res').innerHTML="Name: "+ name+"<br>Product Name: "+ product+"<br>Product Price: $"+ price +
+                    "<br>Voucher code: "+code+"<br>Total Cost: "+total
+        }else{
+            document.getElementById('res').innerHTML="Name: "+ name+"<br>Product Name: "+ product+"<br>Product Price: $"+ price +
+            "<br>Invalid Voucher Code"+"<br>Total Cost: "+price
+        }
+    }else{
+        document.getElementById('res').innerHTML="Name: "+ name+"<br>Product Name: "+ product+"<br>Product Price: $"+ price +
+        "<br>Total Cost: $"+price
+    }}
+   </script>
+</body>
+</html>
