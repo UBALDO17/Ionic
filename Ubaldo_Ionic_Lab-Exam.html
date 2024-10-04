@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart Discount App</title>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+</head>
+<body>
+  
+<ion-app>
+    <!-- Header -->
+    <ion-header>
+        <ion-toolbar color="tertiary">
+            <ion-title><ion-icon name="cart-outline"></ion-icon> Shopping Cart Discount App</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <!-- Content -->
+    <ion-content class="ion-padding">
+        <!-- Name -->
+        <ion-item>
+            <ion-input 
+            id="name"
+            label="Enter your name"
+            label-placement="floating"  
+            type="text"></ion-input><ion-icon name="person-circle-outline"></ion-icon>
+        </ion-item>
+
+        <!-- Product Name -->
+        <ion-item>
+            <ion-input
+            id="p_name" 
+            label="Enter product name"
+            label-placement="floating"  
+            type="text"></ion-input><ion-icon name="pricetag-outline"></ion-icon>
+        </ion-item>
+
+        <!-- Product Price -->
+        <ion-item>
+            <ion-input
+            id="p_price" 
+            label="Enter product price"
+            label-placement="floating"  
+            type="number"></ion-input><ion-icon name="cash-outline"></ion-icon>
+        </ion-item>
+
+        <!-- Discount -->
+        <ion-list>
+            <ion-item>
+                <ion-select label="Discount Code?" id="discount" placeholder="Want a discount?" (ionChange)="myChange()">
+                    <ion-select-option value="yes">Yes</ion-select-option>
+                    <ion-select-option value="no">No</ion-select-option>
+                </ion-select><ion-icon name="card-outline"></ion-icon>
+            </ion-item>
+            <ion-item id="notDisplay" style="display: none;">
+                <ion-input 
+                id="code"
+                label="Enter the discount code"
+                label-placement="floating"  
+                type="text"></ion-input><ion-icon name="key-outline"></ion-icon>
+            </ion-item>
+        </ion-list>
+
+        <br> 
+
+        <!-- Button -->
+        <ion-button expand="block" onclick="triggerMode()" color="primary"><ion-icon name="calculator-outline"></ion-icon> CALCULATE TOTAL</ion-button>
+       
+        <!-- Result -->
+        <div>
+            <ion-card>
+                <ion-card-header>
+                    <ion-card-title ion-card-title><ion-icon name="document-text-outline"></ion-icon> Order Summary</ion-card-title>
+                </ion-card-header>
+                <ion-card-content id="res">The summary will appear here...</ion-card-content>
+            </ion-card>
+        </div>
+    </ion-content>
+</ion-app>
+
+<script>
+    document.getElementById('discount').addEventListener("ionChange", myChange)
+     function myChange(){
+        const discount = document.getElementById('discount').value
+        const notDisplay = document.getElementById('notDisplay')
+
+        if (discount == "yes"){
+            notDisplay.style.display = "block"
+        } else {
+            notDisplay.style.display = "none"
+        }
+    }
+    function triggerMode(){
+        const name = document.getElementById('name').value
+        const p_name = document.getElementById('p_name').value
+        const p_price = parseInt(document.getElementById('p_price').value)
+        const discount = document.getElementById('discount').value
+        const code = document.getElementById('code').value.toUpperCase()
+
+        let newPrice = p_price - (p_price * .1)
+        let applied = p_price * .1
+
+        if (discount == "yes"){
+            document.getElementById('res').innerHTML = `Customer: <b>${name}</b>`
+            document.getElementById('res').innerHTML += `<br>Product: <b>${p_name}</b>`
+            document.getElementById('res').innerHTML += `<br>Price: <b>P ${p_price}</b>`
+            if (code == "DISCOUNT10"){
+                document.getElementById('res').innerHTML += `<br>Discount Applied: <b>10% (- P ${applied})</b>`
+                document.getElementById('res').innerHTML += `<br>Total Cost: <b>P ${newPrice}</b>`
+            } else {
+                document.getElementById('res').innerHTML += `<br>Discount Applied: <b>Invalid Code!</b>`
+                document.getElementById('res').innerHTML += `<br>Total Cost: <b>P ${p_price}</b>`
+            }
+        } else if (discount == "no"){
+            document.getElementById('res').innerHTML = `Customer: <b>${name}</b>`
+            document.getElementById('res').innerHTML += `<br>Product: <b>${p_name}</b>`
+            document.getElementById('res').innerHTML += `<br>Price: <b>P ${p_price}</b>`
+            document.getElementById('res').innerHTML += `<br>Total Cost: <b>P ${p_price}</b>`
+        }
+
+    }
+</script>
+
+</body>
+</html>
